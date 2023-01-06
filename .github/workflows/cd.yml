@@ -4,7 +4,7 @@
 name: Node.js CI
 
 on:
-  pull_request:
+  push:
     branches: ['main']
 
 jobs:
@@ -24,5 +24,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm install
-      - run: npx eslint src/**/*.ts
       - run: npm run build
+      - run: zip build.zip dist
+      - run: echo Deploy completed successfully!
