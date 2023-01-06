@@ -18,12 +18,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm install
-      - run: npm run build
-      - run: zip build.zip dist
-      - run: echo Deploy completed successfully!
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Zip
+        run: zip build.zip dist
+
+      - name: 'Deploy'
+        run: echo Deploy completed successfully!
